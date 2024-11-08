@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="MovieTracker.MainTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+<!--        color for the action space Netowork and task bar color-->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
+<!--        all pages background color-->
+        <item name="android:windowBackground">@color/background</item>
+<!--        all pages font-->
+        <item name="android:fontFamily">@font/amazonembermedium</item>
+    </style>
+
+    <style name="MovieTracker.MainTheme.mainPage" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!--        color for the action space Netowork and task bar color-->
+        <item name="android:statusBarColor">@color/primaryBackgroundColor</item>
+        <item name="android:navigationBarColor">@color/primaryBackgroundColor</item>
+        <!--        all pages background color-->
+        <item name="android:windowBackground">@color/background</item>
+        <!--        all pages font-->
+        <item name="android:fontFamily">@font/amazonembermedium</item>
+    </style>
+
+</resources>
