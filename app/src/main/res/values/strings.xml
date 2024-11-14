@@ -3,4 +3,6 @@
     <string name="api_key">fb0be00eac6d6cb52b034048de92c7ee</string>
     <string name="movieDetails">Movie Details</string>
     <string name="popularMovies">Popular Movies</string>
+    <string name="nowShowing">Now Showing</string>
+    <string name="topRated">Top Rated</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.learning.movietracker.model.Movie;
 import com.learning.movietracker.model.moviedetails.CastAndCrew;
 import com.learning.movietracker.model.moviedetails.MovieDetails;
+import com.learning.movietracker.model.searchmovies.SearchMovieResult;
 import com.learning.movietracker.repository.MovieDBRepo;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     //                   access Android-specific components
 
     private MovieDBRepo movieDBRepo;
+    private String searchedKeyword;
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
@@ -27,11 +29,19 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
     //Live Data
-    public LiveData<List<Movie>> getAllMovies() {
-        return movieDBRepo.getMutableLiveData();
+    public LiveData<List<Movie>> getAllMovies(String movieCategory) {
+        return movieDBRepo.getMutableLiveData(movieCategory);
     }
 
     public MutableLiveData<MovieDetails> getMovieDetail(String movieId) { return movieDBRepo.getMovieDetails(movieId);}
 
     public MutableLiveData<CastAndCrew> getCastAndCrew(String movId) { return movieDBRepo.getMovieCastndCrew(movId);}
+
+    public void searchBarKeyTyped(String searchText) {
+        searchedKeyword = searchText;
+    }
+
+    public MutableLiveData<SearchMovieResult> getSearchedMovies() {
+        return movieDBRepo.getSearchedMovies(searchedKeyword);
+    }
 }

@@ -10,6 +10,7 @@ import com.learning.movietracker.model.Movie;
 import com.learning.movietracker.model.Result;
 import com.learning.movietracker.model.moviedetails.CastAndCrew;
 import com.learning.movietracker.model.moviedetails.MovieDetails;
+import com.learning.movietracker.model.searchmovies.SearchMovieResult;
 import com.learning.movietracker.serviceAPI.MovieApiService;
 import com.learning.movietracker.serviceAPI.MovieDBInstance;
 
@@ -30,18 +31,20 @@ public class MovieDBRepo {
         this.application = application;
     }
 
-    public MutableLiveData<List<Movie>> getMutableLiveData() {
+    public MutableLiveData<List<Movie>> getMutableLiveData(String moviesCategory) {
 
         MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<List<Movie>>();
         MovieApiService movieService = MovieDBInstance.getService();
 
-        Call<Result> resultCall = movieService.getPopularMovies(application.getApplicationContext().getString(R.string.api_key));
+        Call<Result> resultCall = movieService.getPopularMovies(moviesCategory, application.getApplicationContext().getString(R.string.api_key));
+        Log.i("**moviesCateogory", moviesCategory);
         // perform network request in the background thread and
         // handle the response on the main (UI) thread
         resultCall.enqueue(new Callback<Result>() {
             ArrayList<Movie> movies = new ArrayList<Movie>();
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
+                Log.i("**response", response.body().toString());
                 Result result = response.body();
 
                 if (result != null && result.getResults() != null){
@@ -100,5 +103,25 @@ public class MovieDBRepo {
         });
 
         return mutableLiveData;
+    }
+
+    public MutableLiveData<SearchMovieResult> getSearchedMovies(String searachedString) {
+        MutableLiveData<SearchMovieResult> resultMutableLiveData = new MutableLiveData<>();
+        MovieApiService movieApiService = MovieDBInstance.getService();
+
+        Call<SearchMovieResult> moviesResultCall = movieApiService.getSearchedMoviesResults(searachedString, application.getApplicationContext().getString(R.string.api_key));
+        moviesResultCall.enqueue(new Callback<SearchMovieResult>() {
+            @Override
+            public void onResponse(Call<SearchMovieResult> call, Response<SearchMovieResult> response) {
+                SearchMovieResult apiResult = response.body();
+                if (apiResult != null) {
+                    resultMutableLiveData.setValue(apiResult);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SearchMovieResult> call, Throwable t) {}
+        });
+        return resultMutableLiveData;
     }
 }

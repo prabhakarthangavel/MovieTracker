@@ -96,9 +96,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:minWidth="230dp"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/movieSubInfo">
 
@@ -121,7 +121,6 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:width="40dp"
             android:height="150dp"
             android:autoSizeMaxTextSize="18sp"
             android:autoSizeMinTextSize="12sp"
@@ -132,7 +131,6 @@
             android:textColor="@color/textPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
             app:layout_constraintVertical_bias="0.0" />
 
