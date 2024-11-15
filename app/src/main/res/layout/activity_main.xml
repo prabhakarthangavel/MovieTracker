@@ -15,7 +15,7 @@
 
         <EditText
             android:id="@+id/searchbox"
-            android:layout_width="393dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="60dp"
@@ -24,11 +24,37 @@
             android:elevation="4dp"
             android:hint="Search movie here"
             android:textSize="16sp"
+            android:drawableEnd="@drawable/baseline_clear_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <FrameLayout
+            android:id="@+id/searchFragmentSpace"
+            app:layout_constraintTop_toBottomOf="@id/searchbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="150dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp">
+                <ListView
+                    android:id="@+id/searchResultList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"/>
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+<!--        create this scrollview as new fragment-->
         <ScrollView
+            android:id="@+id/scrollViewContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="125dp"

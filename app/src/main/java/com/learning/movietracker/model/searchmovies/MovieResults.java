@@ -1,5 +1,11 @@
 package com.learning.movietracker.model.searchmovies;
 
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -49,6 +55,20 @@ public class MovieResults {
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
+
+    @BindingAdapter("movieImageUrl")
+    public static void loadImage(ImageView movieImage, String imageUrl){
+        String imagePath = "https://image.tmdb.org/t/p/w500/"+imageUrl;
+
+        Glide.with(movieImage.getContext())
+                .load(imagePath)
+                .into(movieImage);
+    }
+
+    @BindingAdapter("releaseYear")
+    public static void getReleaseYear(TextView textView, String releaseDate) {
+        textView.setText(releaseDate.substring(0, 4));
+    }
 
     public Boolean getAdult() {
         return adult;
