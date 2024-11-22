@@ -11,7 +11,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MovieApiService {
-
     // The service interface defines the structure
     // and behavior of the API requests.
     // Acts as a bridge between your app and the API
@@ -22,7 +21,7 @@ public interface MovieApiService {
     // the expected response from the API.
 
     @GET("movie/{movieCategory}")
-    Call<Result> getPopularMovies(@Path("movieCategory") String movieCategory, @Query("api_key") String apiKey);
+    Call<Result> getPopularMovies(@Path("movieCategory") String movieCategory, @Query("api_key") String apiKey, @Query("region") String region);
 
     @GET("movie/{movie_id}")
     Call<MovieDetails> getMovieDetails(@Path("movie_id") String movieId, @Query("api_key") String apiKey);

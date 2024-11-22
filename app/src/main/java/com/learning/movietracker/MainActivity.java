@@ -1,19 +1,23 @@
 package com.learning.movietracker;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -33,6 +37,7 @@ import com.learning.movietracker.viewmodel.MainActivityViewModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<MovieResults> movieResultsList;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +60,23 @@ public class MainActivity extends AppCompatActivity {
         nowShowingTitle.setText(R.string.nowShowing);
         TextView topRated = findViewById(R.id.topRatedMoviesTitle);
         topRated.setText(R.string.topRated);
+        TextView upcoing = findViewById(R.id.upcomingRatedMoviesTitle);
+        upcoing.setText(R.string.upcoming);
 
         String[] moviesTypes = {"now_playing", "popular", "top_rated", "upcoming"};
         for (String moviesType : moviesTypes) {
             switch (moviesType) {
                 case "now_playing":
-                    getMoviesByType(moviesType, mainBinding.nowShowingrecyclerview);
+                    getMoviesByType(moviesType, mainBinding.nowShowingrecyclerview, true);
                     break;
                 case "popular":
-                    getMoviesByType(moviesType, mainBinding.recyclerview);
+                    getMoviesByType(moviesType, mainBinding.recyclerview, false);
                     break;
                 case "top_rated":
-                    getMoviesByType(moviesType, mainBinding.topRatedRecyclerview);
+                    getMoviesByType(moviesType, mainBinding.topRatedRecyclerview, false);
+                    break;
+                case "upcoming":
+                    getMoviesByType(moviesType, mainBinding.upcomingMoviesRecyclerview, true);
                     break;
             }
         }
@@ -78,9 +89,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 if (charSequence.length() > 0) {
+                    Drawable rightDrwable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_clear_20);
+                    mainBinding.searchbox.setCompoundDrawablesWithIntrinsicBounds(null, null, rightDrwable, null);
                     viewModel.searchBarKeyTyped(charSequence.toString());
                     getSearchedMoviesResult();
-                }else {
+                } else {
+                    Drawable leftDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_search_20);
+                    mainBinding.searchbox.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, null, null);
                     showMainContent(true);
                 }
             }
@@ -90,14 +105,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mainBinding.searchbox.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    Drawable rightDrwable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_clear_20);
+                    if (motionEvent.getRawX() >= (mainBinding.searchbox.getRight() - rightDrwable.getBounds().width() - mainBinding.searchbox.getCompoundPaddingRight())) {
+                        mainBinding.searchbox.getText().clear();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
         mainBinding.searchResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-//                Intent movieDetailsIntent = new Intent(context, MovieDetailsActivity.class);
-//                movieDetailsIntent.putExtra("movieId", movieTileBinding.getMovie().getId().toString());
-//                context.startActivity(movieDetailsIntent);
-
                 MovieResults movieResult = movieResultsList.get(position);
                 Intent movieDetailsIntent = new Intent(MainActivity.this, MovieDetailsActivity.class);
                 movieDetailsIntent.putExtra("movieId", movieResult.getId().toString());
@@ -106,12 +130,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getMoviesByType(String moviesType, RecyclerView recyclerView) {
+    private void getMoviesByType(String moviesType, RecyclerView recyclerView, boolean doLocallySort) {
         viewModel.getAllMovies(moviesType).observe(this, new Observer<List<Movie>>() {
+            String[] regions = {"ta", "hi", "te", "ml", "kn"};
+
             @Override
             public void onChanged(List<Movie> moviesFromLiveData) {
-                ArrayList<Movie> moviesList = (ArrayList<Movie>) moviesFromLiveData;
-                displayMoviesInRecyclerView(moviesList, recyclerView);
+                ArrayList<Movie> movies = new ArrayList<>();
+                if (!moviesFromLiveData.isEmpty()) {
+                    if (doLocallySort) {
+                        for (int i = 0; i < regions.length; i++) {
+                            Movie movieToRemove = null;
+                            for (Movie movie : moviesFromLiveData) {
+                                if (movie.getOriginalLanguage().equalsIgnoreCase(regions[i])) {
+                                    movieToRemove = movie;
+                                }
+                            }
+                            if (movieToRemove != null) {
+                                moviesFromLiveData.remove(movieToRemove);
+                                movies.add(movieToRemove);
+                                i--;
+                            }
+                        }
+                        movies.addAll(moviesFromLiveData);
+                        displayMoviesInRecyclerView(movies, recyclerView);
+                    }else {
+                        movies.addAll(moviesFromLiveData);
+                        displayMoviesInRecyclerView(movies, recyclerView);
+                    }
+                }
             }
         });
     }

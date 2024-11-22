@@ -23,8 +23,9 @@
             android:background="@drawable/rounded_searchbar_bg"
             android:elevation="4dp"
             android:hint="Search movie here"
+            android:drawableStart="@drawable/icons8_search_20"
             android:textSize="16sp"
-            android:drawableEnd="@drawable/baseline_clear_24"
+            android:drawablePadding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,8 +47,8 @@
                 app:cardElevation="4dp">
                 <ListView
                     android:id="@+id/searchResultList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scrollbars="none"/>
             </androidx.cardview.widget.CardView>
         </FrameLayout>
@@ -98,7 +99,6 @@
                     android:id="@+id/nowShowingrecyclerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toTopOf="@id/poupularMoviesTitle"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +133,6 @@
                     android:id="@+id/recyclerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -168,7 +167,6 @@
                     android:id="@+id/topRatedRecyclerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -176,6 +174,41 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/topRatedMoviesTitle"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <com.learning.movietracker.customelements.SectionHeaderHighlight
+                    android:id="@+id/upcomingMoviesHighlight"
+                    android:layout_width="10dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toBottomOf="@id/topRatedRecyclerview"/>
+
+                <TextView
+                    android:id="@+id/upcomingRatedMoviesTitle"
+                    android:layout_width="122dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/amazonembermedium"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/upcomingMoviesHighlight"
+                    app:layout_constraintLeft_toRightOf="@id/upcomingMoviesHighlight"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/upcomingMoviesRecyclerview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/upcomingRatedMoviesTitle"
                     app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

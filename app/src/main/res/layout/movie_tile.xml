@@ -18,13 +18,12 @@
 
 
         <androidx.cardview.widget.CardView
-            android:layout_width="140dp"
-            android:layout_height="225dp"
+            android:layout_width="130dp"
+            android:layout_height="270dp"
             android:layout_margin="8dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
-            app:cardElevation="4dp"
-           >
+            app:cardElevation="4dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -33,12 +32,30 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="210dp"
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     bind:posterPath="@{movie.posterPath}" />
+
+                <ImageView
+                    android:id="@+id/addWatchlist"
+                    android:layout_width="66dp"
+                    android:layout_height="94dp"
+                    android:layout_marginStart="-14.5dp"
+                    android:layout_marginTop="-26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/addWatchlistIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="34dp"
+                    app:layout_constraintStart_toStartOf="@id/addWatchlist"
+                    app:layout_constraintTop_toTopOf="@id/addWatchlist" />
 
                 <include
                     layout="@layout/movie_rating"
@@ -63,6 +80,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_goneMarginTop="0dp" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

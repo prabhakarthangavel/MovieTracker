@@ -32,12 +32,10 @@ public class MovieDBRepo {
     }
 
     public MutableLiveData<List<Movie>> getMutableLiveData(String moviesCategory) {
-
         MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<List<Movie>>();
         MovieApiService movieService = MovieDBInstance.getService();
 
-        Call<Result> resultCall = movieService.getPopularMovies(moviesCategory, application.getApplicationContext().getString(R.string.api_key));
-        Log.i("**moviesCateogory", moviesCategory);
+        Call<Result> resultCall = movieService.getPopularMovies(moviesCategory, application.getApplicationContext().getString(R.string.api_key), application.getApplicationContext().getString(R.string.region));
         // perform network request in the background thread and
         // handle the response on the main (UI) thread
         resultCall.enqueue(new Callback<Result>() {

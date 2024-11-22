@@ -67,7 +67,9 @@ public class MovieResults {
 
     @BindingAdapter("releaseYear")
     public static void getReleaseYear(TextView textView, String releaseDate) {
-        textView.setText(releaseDate.substring(0, 4));
+        if (releaseDate != null && releaseDate.length() > 3) {
+            textView.setText(releaseDate.substring(0, 4));
+        }
     }
 
     public Boolean getAdult() {

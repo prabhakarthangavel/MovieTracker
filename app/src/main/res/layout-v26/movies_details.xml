@@ -14,23 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/titleTooleBar"
-            layout="@layout/toolbar"/>
-
         <androidx.cardview.widget.CardView
             android:id="@+id/bannerCard"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:elevation="8dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTooleBar">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/movieBanner"
@@ -39,15 +34,24 @@
                 android:scaleType="centerCrop"
                 app:bannerImageUrl="@{movieDetailsModel.tagline}"/>
 
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_centerVertical="true"/>
+
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/movieTitle"
-            android:layout_width="337dp"
+            android:layout_width="match_parent"
             android:layout_height="26dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:width="200dp"
+            android:layout_marginTop="8dp"
+            app:layout_goneMarginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="16sp"
             android:autoSizeStepGranularity="2sp"
@@ -73,8 +77,8 @@
             android:id="@+id/cardView"
             android:layout_width="112dp"
             android:layout_height="165dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:elevation="8dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,52 +91,6 @@
                 android:scaleType="centerCrop"
                 app:imageUrl="@{movieDetailsModel.backdropPath}" />
         </androidx.cardview.widget.CardView>
-
-
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView"
-            android:layout_width="238dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:minWidth="230dp"
-            android:scrollbars="none"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/movieSubInfo">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toTopOf="@+id/cardView"
-                app:singleLine="true">
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/movieOverview"
-            android:layout_width="211dp"
-            android:layout_height="112dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:height="150dp"
-            android:autoSizeMaxTextSize="18sp"
-            android:autoSizeMinTextSize="12sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:minWidth="200dp"
-            android:text="@{movieDetailsModel.overview}"
-            android:textColor="@color/textPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/cardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-            app:layout_constraintVertical_bias="0.0" />
 
         <include
             android:id="@+id/movieRating"
@@ -161,9 +119,7 @@
             android:id="@+id/infoDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
             android:background="#D3D3D3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -186,9 +142,7 @@
             android:id="@+id/infoDivider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
             android:background="#D3D3D3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -206,5 +160,45 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/infoDivider1" />
+
+        <LinearLayout
+            android:layout_width="229dp"
+            android:layout_height="162dp"
+            android:layout_marginStart="6dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/cardView">
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    app:singleLine="true">
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/movieOverview"
+                android:layout_width="211dp"
+                android:layout_height="112dp"
+                android:layout_marginTop="4dp"
+                android:height="150dp"
+                android:autoSizeMaxTextSize="13sp"
+                android:autoSizeMinTextSize="11sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:minWidth="200dp"
+                android:text="@{movieDetailsModel.overview}"
+                android:textColor="@color/textPrimary" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

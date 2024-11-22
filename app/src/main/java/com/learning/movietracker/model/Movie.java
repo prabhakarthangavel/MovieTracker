@@ -17,29 +17,32 @@ public class Movie extends BaseObservable{
     @SerializedName("id")
     @Expose
     private Integer id;
-
-
     @SerializedName("title")
     @Expose
     private String title;
-
-
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
-
-
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
-
     @SerializedName("overview")
     @Expose
     private String overview;
-
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
+    @SerializedName("original_language")
+    @Expose
+    private String originalLanguage;
+
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
+    }
+
+    public String getOriginalLanguage() {
+        return this.originalLanguage;
+    }
 
     @BindingAdapter({"posterPath"})
     public static void loadImage(ImageView imageView, String imageUrl){
@@ -103,9 +106,9 @@ public class Movie extends BaseObservable{
     }
 
     @Bindable
-    public String getVoteAverage() {
-//        Log.i("**vote get**", String.format("%.2f", this.voteAverage));
-        return String.format("%.2f", this.voteAverage);
+    public Double getVoteAverage() {
+        String value = String.format("%.2f", this.voteAverage);
+        return Double.parseDouble(value);
     }
 
     public void setVoteAverage(Double voteAverage) {

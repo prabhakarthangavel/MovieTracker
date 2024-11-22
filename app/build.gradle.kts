@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -55,6 +56,17 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-database")
+    //print calling API URI in logs
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    //color palette - to find dominant color in image
+    implementation("androidx.palette:palette:1.0.0")
+    //color palatte - to find image from url
+    implementation("com.squareup.picasso:picasso:2.71828")
 
     implementation(libs.appcompat)
     implementation(libs.material)

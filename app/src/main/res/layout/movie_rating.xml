@@ -5,7 +5,7 @@
     <data>
     <variable
         name="voteAverage"
-        type="String" />
+        type="Double" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             android:id="@+id/textView2"
             android:layout_width="86dp"
             android:layout_height="16dp"
-            android:text="@{voteAverage}"
+            android:text="@{String.valueOf(voteAverage)}"
             android:textColor="@color/textSecondary"
             android:textSize="12sp"
             android:width="200dp"

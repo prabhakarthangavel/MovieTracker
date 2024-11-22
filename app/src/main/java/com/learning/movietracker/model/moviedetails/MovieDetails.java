@@ -311,13 +311,12 @@ public class MovieDetails extends BaseObservable {
     }
 
     @Bindable
-    public String getVoteAverage() {
-//        Log.i("**vote get**", String.format("%.2f", this.voteAverage));
-        return String.format("%.2f", this.voteAverage);
+    public Double getVoteAverage() {
+        String value = String.format("%.2f", this.voteAverage);
+        return Double.parseDouble(value);
     }
 
     public void setVoteAverage(Double voteAverage) {
-
         this.voteAverage = voteAverage;
         notifyPropertyChanged(BR.voteAverage);
     }

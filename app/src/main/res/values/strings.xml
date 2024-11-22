@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">MovieTracker</string>
     <string name="api_key">fb0be00eac6d6cb52b034048de92c7ee</string>
+    <string name="region">in</string>
     <string name="movieDetails">Movie Details</string>
     <string name="popularMovies">Popular Movies</string>
     <string name="nowShowing">Now Showing</string>
     <string name="topRated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
 </resources>
