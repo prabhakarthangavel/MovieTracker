@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:outlineAmbientShadowColor="@color/background"
+        android:background="@color/background">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                app:backgroundTint="@color/background"
+                app:menu="@menu/bottom_navigation_menu"
+                app:labelVisibilityMode="unlabeled"
+                app:itemIconTint="@color/primaryBackgroundColor"
+                app:itemTextColor="@color/primaryBackgroundColor"/>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/floatingNewPostBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:backgroundTint="@color/primaryBackgroundColor"-->
+<!--        app:layout_anchor="@id/bottomNavigationMenu"-->
+<!--        android:src="@drawable/baseline_newpost_24" />-->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

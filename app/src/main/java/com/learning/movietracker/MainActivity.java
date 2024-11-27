@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationBarView;
 import com.learning.movietracker.adapter.MyCustomAdapter;
 import com.learning.movietracker.adapter.SearchListAdaptor;
 import com.learning.movietracker.databinding.ActivityMainBinding;
@@ -35,9 +37,7 @@ import com.learning.movietracker.model.searchmovies.SearchMovieResult;
 import com.learning.movietracker.viewmodel.MainActivityViewModel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -126,6 +126,19 @@ public class MainActivity extends AppCompatActivity {
                 Intent movieDetailsIntent = new Intent(MainActivity.this, MovieDetailsActivity.class);
                 movieDetailsIntent.putExtra("movieId", movieResult.getId().toString());
                 startActivity(movieDetailsIntent);
+            }
+        });
+
+        // handle bottom navigation
+        mainBinding.mainActivityNavMenu.bottomNavigationMenu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getTitle().toString().equalsIgnoreCase("Watchlists")) {
+                    Intent i = new Intent(MainActivity.this, Watchlists.class);
+                    startActivity(i);
+                    return true;
+                }
+                return false;
             }
         });
     }

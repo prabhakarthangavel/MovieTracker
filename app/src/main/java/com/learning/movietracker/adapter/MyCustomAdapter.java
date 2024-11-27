@@ -32,7 +32,7 @@ import java.util.Objects;
 
 public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MovieViewHolder> {
 
-    private static Context context;
+    private final Context context;
     private ArrayList<Movie> movieArrayList;
 
     public MyCustomAdapter(Context context, ArrayList<Movie> movieArrayList) {
@@ -44,7 +44,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MovieV
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MovieTileBinding movieTileBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.movie_tile, parent, false);
-        return new MovieViewHolder(movieTileBinding);
+        return new MovieViewHolder(movieTileBinding, context);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MovieV
     static class MovieViewHolder extends RecyclerView.ViewHolder {
         private MovieTileBinding movieTileBinding;
 
-        public MovieViewHolder(MovieTileBinding movieTileBinding) {
+        public MovieViewHolder(MovieTileBinding movieTileBinding, Context context) {
             super(movieTileBinding.getRoot());
             this.movieTileBinding = movieTileBinding;
 
