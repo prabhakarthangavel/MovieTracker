@@ -11,6 +11,11 @@
         <item name="android:windowBackground">@color/background</item>
 <!--        all pages font-->
         <item name="android:fontFamily">@font/amazonembermedium</item>
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
 
     <style name="MovieTracker.MainTheme.mainPage" parent="Theme.Material3.DayNight.NoActionBar">
@@ -24,11 +29,17 @@
         <item name="android:windowBackground">@color/background</item>
         <!--        all pages font-->
         <item name="android:fontFamily">@font/amazonembermedium</item>
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
 
     <!-- res/values/styles.xml -->
     <style name="CustomBottomNavigationText" parent="TextAppearance.AppCompat.Small">
         <item name="android:textSize">10sp</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
 
 </resources>

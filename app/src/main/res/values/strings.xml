@@ -7,4 +7,5 @@
     <string name="nowShowing">Now Showing</string>
     <string name="topRated">Top Rated</string>
     <string name="upcoming">Upcoming</string>
+    <string name="watchlistTitle">Your Watchlists</string>
 </resources>

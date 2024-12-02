@@ -52,6 +52,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MovieV
         Movie movie = movieArrayList.get(position);
         holder.movieTileBinding.setMovie(movie);
         holder.fetchWatchlist(movie);
+        holder.hideVoteView(movie);
     }
 
     @Override
@@ -167,6 +168,13 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MovieV
 
                 }
             });
+        }
+
+        private void hideVoteView(Movie movie) {
+            if (movie.getVoteAverage() <= 0) {
+                View ratingView = movieTileBinding.movieRating.getRoot();
+                ratingView.setVisibility(View.GONE);
+            }
         }
     }
 }
