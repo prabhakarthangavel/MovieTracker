@@ -1,5 +1,6 @@
 package com.learning.movietracker.model.searchmovies;
 
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 

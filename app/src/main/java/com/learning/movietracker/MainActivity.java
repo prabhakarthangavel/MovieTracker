@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getTitle().toString().equalsIgnoreCase("home")) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainFrameLayout, new HomeFragment()).commit();
                     return true;
+                }else if (item.getTitle().toString().equalsIgnoreCase("add post")) {
+                    Intent i = new Intent(getApplicationContext(), AddReviewActivity.class);
+                    startActivity(i);
                 }
                 return false;
             }

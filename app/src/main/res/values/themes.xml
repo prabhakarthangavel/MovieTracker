@@ -11,11 +11,7 @@
         <item name="android:windowBackground">@color/background</item>
 <!--        all pages font-->
         <item name="android:fontFamily">@font/amazonembermedium</item>
-
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/white</item>
-        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorAccent">@color/primaryBackgroundColor</item>
     </style>
 
     <style name="MovieTracker.MainTheme.mainPage" parent="Theme.Material3.DayNight.NoActionBar">
@@ -29,11 +25,11 @@
         <item name="android:windowBackground">@color/background</item>
         <!--        all pages font-->
         <item name="android:fontFamily">@font/amazonembermedium</item>
-
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/white</item>
-        <item name="colorControlHighlight">@color/white</item>
+<!--        calender color-->
+        <item name="colorPrimary">@color/primaryBackgroundColor</item>
+<!--        <item name="colorPrimaryDark">@color/primaryBackgroundColor</item>-->
+        <item name="colorAccent">@color/primaryBackgroundColor</item>
+<!--        <item name="colorControlHighlight">@color/primaryBackgroundColor</item>-->
     </style>
 
     <!-- res/values/styles.xml -->
@@ -41,5 +37,9 @@
         <item name="android:textSize">10sp</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
+<!--    <style name="CustomDatePickerDialog" parent="ThemeOverlay.AppCompat.Dialog">-->
+<!--        <item name="android:color">@color/black</item>-->
+<!--    </style>-->
 
 </resources>

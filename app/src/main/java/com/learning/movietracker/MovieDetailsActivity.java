@@ -90,7 +90,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                                     int dominantColor = palette.getDominantColor(0);
                                     boolean isDark = isColorDark(dominantColor);
                                     if (movieDetailsBinding.backButton != null) {
-                                        movieDetailsBinding.backButton.setImageResource(isDark ? R.drawable.baseline_arrow_back_24_white : R.drawable.baseline_arrow_back_24_black);
+                                        movieDetailsBinding.backButton.setImageResource(isDark ? R.drawable.baseline_arrow_back_24_background : R.drawable.baseline_arrow_back_24_black);
                                     }
                                 }
                             }

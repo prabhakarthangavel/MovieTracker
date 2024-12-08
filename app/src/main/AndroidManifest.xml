@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MovieDetailsActivity" android:parentActivityName=".MainActivity" android:theme="@style/MovieTracker.MainTheme"/>
+        <activity android:name=".AddReviewActivity" android:parentActivityName=".MainActivity" android:theme="@style/MovieTracker.MainTheme.mainPage"/>
     </application>
 
 </manifest>

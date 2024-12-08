@@ -5,12 +5,15 @@
     <variable
         name="pageTitle"
         type="String" />
+    <variable
+        name="isBack"
+        type="boolean" />
 </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:background="@color/background">
+        android:background="@color/primaryBackgroundColor">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/baseline_arrow_back_24"/>
+                android:src="@{isBack ? @drawable/baseline_arrow_back_24_background : @drawable/baseline_close_24_background}"/>
 
             <TextView
                 android:id="@+id/pageTitle"
@@ -30,7 +33,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="36dp"
                 android:layout_marginBottom="4dp"
-                android:textColor="@color/textPrimary"
+                android:textColor="@color/background"
                 android:layout_centerHorizontal="true"
                 android:text="@{pageTitle}"
                 android:textSize="20sp" />
