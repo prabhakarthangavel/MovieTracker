@@ -2,12 +2,14 @@ package com.learning.movietracker.viewmodel;
 
 import android.app.Application;
 
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.learning.movietracker.model.Movie;
+import com.learning.movietracker.model.addreview.AddReview;
 import com.learning.movietracker.model.moviedetails.CastAndCrew;
 import com.learning.movietracker.model.moviedetails.MovieDetails;
 import com.learning.movietracker.model.searchmovies.SearchMovieResult;
@@ -19,7 +21,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     // ViewModel: suitable for non-Android-specific logic
     // AndroidViewModel: used when viewModel class needs to
     //                   access Android-specific components
-
+    public ObservableField<AddReview> $addReview = new ObservableField<>();
     private MovieDBRepo movieDBRepo;
     private String searchedKeyword;
 
@@ -43,5 +45,13 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public MutableLiveData<SearchMovieResult> getSearchedMovies() {
         return movieDBRepo.getSearchedMovies(searchedKeyword);
+    }
+
+    public ObservableField<AddReview> getaddReview() {
+        return $addReview;
+    }
+
+    public void setaddReview(AddReview addReview) {
+        $addReview.set(addReview);
     }
 }

@@ -4,12 +4,12 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
-<!--        color for the action space Netowork and task bar color-->
+        <!--        color for the action space Netowork and task bar color-->
         <item name="android:statusBarColor">@color/background</item>
         <item name="android:navigationBarColor">@color/background</item>
-<!--        all pages background color-->
+        <!--        all pages background color-->
         <item name="android:windowBackground">@color/background</item>
-<!--        all pages font-->
+        <!--        all pages font-->
         <item name="android:fontFamily">@font/amazonembermedium</item>
         <item name="colorAccent">@color/primaryBackgroundColor</item>
     </style>
@@ -25,21 +25,35 @@
         <item name="android:windowBackground">@color/background</item>
         <!--        all pages font-->
         <item name="android:fontFamily">@font/amazonembermedium</item>
-<!--        calender color-->
-        <item name="colorPrimary">@color/primaryBackgroundColor</item>
-<!--        <item name="colorPrimaryDark">@color/primaryBackgroundColor</item>-->
+        <!--        calender color-->
+        <!--        <item name="colorPrimary">@color/primaryBackgroundColor</item>-->
+        <!--        <item name="colorPrimaryDark">@color/primaryBackgroundColor</item>-->
         <item name="colorAccent">@color/primaryBackgroundColor</item>
-<!--        <item name="colorControlHighlight">@color/primaryBackgroundColor</item>-->
+        <!--        <item name="colorControlHighlight">@color/primaryBackgroundColor</item>-->
     </style>
 
-    <!-- res/values/styles.xml -->
     <style name="CustomBottomNavigationText" parent="TextAppearance.AppCompat.Small">
         <item name="android:textSize">10sp</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
 
-<!--    <style name="CustomDatePickerDialog" parent="ThemeOverlay.AppCompat.Dialog">-->
-<!--        <item name="android:color">@color/black</item>-->
-<!--    </style>-->
+    <style name="Widget.Material3.primaryButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/primaryBackgroundColor</item>
+        <item name="background">@drawable/primay_button_background</item>
+        <item name="rippleColor">@color/primaryBackgroundColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/background</item>
+    </style>
+
+    <style name="Widget.Material3.secondaryButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/white</item>
+        <item name="background">@drawable/secondary_button_background</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#595959</item>
+    </style>
+
 
 </resources>

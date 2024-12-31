@@ -8,6 +8,12 @@
     <variable
         name="isBack"
         type="boolean" />
+    <variable
+        name="showRightIcon"
+        type="Integer" />
+    <variable
+        name="rightIcon"
+        type="Integer" />
 </data>
 
     <RelativeLayout
@@ -37,6 +43,16 @@
                 android:layout_centerHorizontal="true"
                 android:text="@{pageTitle}"
                 android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/toolbarRightIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentEnd="true"
+                android:visibility="@{showRightIcon}"
+                android:src="@drawable/baseline_delete_24_white"/>
         </RelativeLayout>
     </RelativeLayout>
 </layout>

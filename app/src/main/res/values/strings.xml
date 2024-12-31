@@ -10,4 +10,11 @@
     <string name="watchlistTitle">Your Watchlists</string>
     <string name="addReview">Add Review</string>
     <string name="iWatched">I Watched</string>
+    <string name="youAdded">You Added</string>
+    <string name="firstTimeWatched">First time watched</string>
+    <string name="like">Like</string>
+    <string name="seenBefore">I have seen this before</string>
+    <string name="liked">Liked</string>
+    <string name="save">Save</string>
+    <string name="post">Post</string>
 </resources>

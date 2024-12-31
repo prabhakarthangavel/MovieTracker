@@ -36,23 +36,28 @@
 
         <LinearLayout
             android:id="@+id/searchResultLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="250dp"
+            android:layout_height="64dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/movieImageCard"
+            app:layout_constraintHorizontal_bias="0.269"
             app:layout_constraintLeft_toRightOf="@id/movieImageCard"
-            app:layout_constraintTop_toTopOf="@id/movieImageCard">
+            app:layout_constraintRight_toLeftOf="@+id/addMovieReview"
+            app:layout_constraintTop_toTopOf="@id/movieImageCard"
+            app:layout_constraintVertical_bias="0.727">
 
             <TextView
                 android:id="@+id/mvoieTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:fontFamily="@font/amazonembermedium"
                 android:text="@{movie.title}"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/movieReleaseYear"
