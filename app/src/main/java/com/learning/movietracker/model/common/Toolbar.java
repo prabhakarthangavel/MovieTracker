@@ -18,6 +18,12 @@ public class Toolbar {
         this.rightIcon = rightIcon;
     }
 
+    public Toolbar(String pageTitle, boolean isBack, Integer showRightIcon) {
+        this.pageTitle = pageTitle;
+        this.isBack = isBack;
+        this.showRightIcon = showRightIcon;
+    }
+
     public String getPageTitle() {
         return pageTitle;
     }

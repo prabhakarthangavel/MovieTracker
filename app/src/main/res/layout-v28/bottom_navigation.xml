@@ -19,8 +19,6 @@
             android:layout_height="43.5dp"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
-            app:itemTextAppearanceActive="@style/CustomBottomNavigationText"
-            app:itemTextAppearanceInactive="@style/CustomBottomNavigationText"
             app:itemIconSize="21dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"

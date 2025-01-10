@@ -10,8 +10,9 @@ import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
-public class MovieResults {
+public class MovieResults implements Serializable {
 
 
     @SerializedName("adult")

@@ -44,6 +44,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Glide - Image display in android view
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.navigation.ui)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
     //hilt dagger
@@ -67,6 +68,7 @@ dependencies {
     implementation("androidx.palette:palette:1.0.0")
     //color palatte - to find image from url
     implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("androidx.drawerlayout:drawerlayout:1.1.1")
 
     implementation(libs.appcompat)
     implementation(libs.material)

@@ -31,6 +31,8 @@ import com.learning.movietracker.adapter.WatchlistAdapter;
 import com.learning.movietracker.adaterInerface.WatchlistListener;
 import com.learning.movietracker.databinding.WatchlistsBinding;
 import com.learning.movietracker.model.Movie;
+import com.learning.movietracker.model.addreview.AddReview;
+import com.learning.movietracker.model.searchmovies.MovieResults;
 import com.learning.movietracker.viewmodel.MainActivityViewModel;
 
 import java.util.ArrayList;
@@ -105,6 +107,13 @@ public class WatchlistFragment extends Fragment implements WatchlistListener {
 
     @Override
     public void addMoviewReviewClick(Movie movie) {
-
+        Intent intent = new Intent(getContext(), AddReviewActivity.class);
+        intent.putExtra("isFromWatchlist", true);
+        intent.putExtra("movieId", movie.getId());
+        intent.putExtra("movieTitle", movie.getTitle());
+        intent.putExtra("moviePosterPath", movie.getPosterPath());
+        intent.putExtra("movieReleaseDate", movie.getReleaseDate());
+        intent.putExtra("movieOverview", movie.getOverview());
+        startActivity(intent);
     }
 }

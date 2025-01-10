@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/savedPosts"
+        android:title="@string/savedPosts"
+        android:titleTextAppearance="@style/CustomSideNavText"
+        android:icon="@drawable/icons8_saved_100"/>
+    <item android:id="@+id/reviews"
+        android:title="@string/Reviews"
+        android:titleTextAppearance="@style/CustomSideNavText"
+        android:icon="@drawable/icons8_reviews_100"/>
+</menu>

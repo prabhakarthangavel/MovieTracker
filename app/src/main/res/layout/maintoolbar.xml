@@ -4,5 +4,13 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/primaryBackgroundColor">
+
+        <ImageView
+            android:id="@+id/sideBarMenu"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_width="33dp"
+            android:layout_height="38dp"
+            android:src="@drawable/icons8_menu_250" />
     </RelativeLayout>
 </layout>

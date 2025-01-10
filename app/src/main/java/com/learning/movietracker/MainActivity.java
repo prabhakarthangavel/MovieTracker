@@ -10,34 +10,28 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.ImageView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationBarView;
-import com.learning.movietracker.adapter.MyCustomAdapter;
-import com.learning.movietracker.adapter.SearchListAdaptor;
-import com.learning.movietracker.databinding.ActivityMainBinding;
-import com.learning.movietracker.model.Movie;
-import com.learning.movietracker.model.searchmovies.MovieResults;
-import com.learning.movietracker.model.searchmovies.SearchMovieResult;
-import com.learning.movietracker.viewmodel.MainActivityViewModel;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.navigation.NavigationView;
+import com.learning.movietracker.databinding.ActivityMainBinding;
+import com.learning.movietracker.viewmodel.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,11 +64,34 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }else if (item.getTitle().toString().equalsIgnoreCase("add post")) {
                     Intent i = new Intent(getApplicationContext(), AddReviewActivity.class);
+                    i.putExtra("isFromWatchlist", false);
                     startActivity(i);
                 }
                 return false;
             }
         });
+
+
+
+//        NavigationView navigationView = findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open,
+//                R.string.nav_close);
+//        drawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id, new HomeFragment()).commit();
+//            navigationView.setCheckedItem(R.id.savedPosts);
+//        }
+
+//        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.titleTooleBar);
+        // Get the fragment reference
+//        if (fragment instanceof HomeFragment) {
+//            HomeFragment myFrag = new HomeFragment();
+//            ConstraintLayout constraintLayout = myFrag.getView().findViewById(R.id.titleTooleBar);
+
+            // Use the textView reference
+//        }
     }
 
     private void showOnlyBottomNavBar(boolean isShowBottomNavBar) {

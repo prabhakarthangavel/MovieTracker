@@ -2,6 +2,7 @@ package com.learning.movietracker;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -63,6 +64,7 @@ public class AddReviewActivity extends AppCompatActivity {
     private MainActivityViewModel viewModel;
     private List<MovieResults> movieResultsList;
     private final AddReview userReview = new AddReview();
+    private final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -73,65 +75,73 @@ public class AddReviewActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         addReviewBinding.setViewModel(viewModel);
         addReviewBinding.setLifecycleOwner(this);
-        Toolbar toolbar = new Toolbar(getString(R.string.addReview), false, View.GONE, 0);
-        addReviewBinding.setToolbar(toolbar);
 
-        initialDisplay();
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra("isFromWatchlist", false)) {
+            MovieResults movieResult = new MovieResults();
+            movieResult.setId(intent.getIntExtra("movieId", 0));
+            movieResult.setTitle(intent.getStringExtra("movieTitle"));
+            movieResult.setPosterPath(intent.getStringExtra("moviePosterPath"));
+            movieResult.setReleaseDate(intent.getStringExtra("movieReleaseDate"));
+            movieResult.setOverview(intent.getStringExtra("movieOverview"));
+            showAddReviewPage(movieResult);
+        } else {
+            Toolbar toolbar = new Toolbar(getString(R.string.addReview), false, View.GONE, 0);
+            addReviewBinding.setToolbar(toolbar);
 
+            initialDisplay();
+
+
+            addReviewBinding.searchbox.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                    if (charSequence.length() > 0) {
+                        Drawable rightDrwable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_clear_20);
+                        addReviewBinding.searchbox.setCompoundDrawablesWithIntrinsicBounds(null, null, rightDrwable, null);
+                        viewModel.searchBarKeyTyped(charSequence.toString());
+                        getSearchedMoviesResult();
+                    } else {
+                        Drawable leftDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_search_20);
+                        addReviewBinding.searchbox.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, null, null);
+                        initialDisplay();
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+
+            addReviewBinding.searchbox.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                        Drawable rightDrwable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_clear_20);
+                        if (motionEvent.getRawX() >= (addReviewBinding.searchbox.getRight() - rightDrwable.getBounds().width() - addReviewBinding.searchbox.getCompoundPaddingRight())) {
+                            addReviewBinding.searchbox.getText().clear();
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            addReviewBinding.searchResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    MovieResults movieResult = movieResultsList.get(position);
+                    showAddReviewPage(movieResult);
+                }
+            });
+        }
         addReviewBinding.headerSection.toolbarBacButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
-            }
-        });
-
-        addReviewBinding.searchbox.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                if (charSequence.length() > 0) {
-                    Drawable rightDrwable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_clear_20);
-                    addReviewBinding.searchbox.setCompoundDrawablesWithIntrinsicBounds(null, null, rightDrwable, null);
-                    viewModel.searchBarKeyTyped(charSequence.toString());
-                    getSearchedMoviesResult();
-                } else {
-                    Drawable leftDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_search_20);
-                    addReviewBinding.searchbox.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, null, null);
-                    initialDisplay();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        addReviewBinding.searchbox.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    Drawable rightDrwable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.icons8_clear_20);
-                    if (motionEvent.getRawX() >= (addReviewBinding.searchbox.getRight() - rightDrwable.getBounds().width() - addReviewBinding.searchbox.getCompoundPaddingRight())) {
-                        addReviewBinding.searchbox.getText().clear();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-
-        addReviewBinding.searchResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                MovieResults movieResult = movieResultsList.get(position);
-                Toolbar toolbar = new Toolbar(getString(R.string.iWatched), false, View.GONE, 0);
-                addReviewBinding.setToolbar(toolbar);
-                switchSearchAndReview();
-                setValuesToReviewSection(movieResult);
-                updateValuesForViews(movieResult.getId());
             }
         });
 
@@ -141,7 +151,7 @@ public class AddReviewActivity extends AppCompatActivity {
                 if (addReviewBinding.firstTimeWatchText.getText().toString().equals(getString(R.string.firstTimeWatched))) {
                     addReviewBinding.eyeImage.setImageResource(R.drawable.icons8_eye_100_watched);
                     addReviewBinding.firstTimeWatchText.setText(R.string.seenBefore);
-                }else {
+                } else {
                     addReviewBinding.eyeImage.setImageResource(R.drawable.icons8_eye_100);
                     addReviewBinding.firstTimeWatchText.setText(R.string.firstTimeWatched);
                 }
@@ -154,7 +164,7 @@ public class AddReviewActivity extends AppCompatActivity {
                 if (addReviewBinding.movieLikeText.getText().toString().equals(getString(R.string.like))) {
                     addReviewBinding.movieLiked.setImageResource(R.drawable.icons8_heart_100_filled);
                     addReviewBinding.movieLikeText.setText(R.string.liked);
-                }else {
+                } else {
                     addReviewBinding.movieLiked.setImageResource(R.drawable.icons8_heart_100);
                     addReviewBinding.movieLikeText.setText(R.string.like);
                 }
@@ -177,7 +187,7 @@ public class AddReviewActivity extends AppCompatActivity {
                 dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot snapshot1: snapshot.getChildren()) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             AddReview addReview = snapshot1.getValue(AddReview.class);
                             if (addReview != null && Objects.equals(addReview.getId(), userReview.getId())) {
                                 key[0] = snapshot1.getKey();
@@ -187,12 +197,14 @@ public class AddReviewActivity extends AppCompatActivity {
 
                         if (key[0] != null) {
                             dbRef.child(key[0]).setValue(userReview);
-                        }else {
+                        } else {
                             dbRef.push().setValue(userReview);
                         }
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
             }
         });
@@ -200,6 +212,7 @@ public class AddReviewActivity extends AppCompatActivity {
         addReviewBinding.postBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                removePostFromSavedPost(userReview.getId());
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference dbRef = database.getReference("tbl_posts");
                 userReview.setReview(addReviewBinding.reviewEditText.getText().toString());
@@ -213,7 +226,7 @@ public class AddReviewActivity extends AppCompatActivity {
                 dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot snapshot1: snapshot.getChildren()) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             AddReview addReview = snapshot1.getValue(AddReview.class);
                             if (addReview != null && Objects.equals(addReview.getId(), userReview.getId())) {
                                 key[0] = snapshot1.getKey();
@@ -222,22 +235,37 @@ public class AddReviewActivity extends AppCompatActivity {
                         }
 
                         if (key[0] != null) {
+                            //updatong the existing post
                             dbRef.child(key[0]).setValue(userReview);
-                            removePostFromSavedPost();
-                        }else {
+                        } else {
+                            // creating new post
                             dbRef.push().setValue(userReview);
                         }
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
+
             }
         });
     }
 
+    private void showAddReviewPage(MovieResults movieResult) {
+        Toolbar toolbar = new Toolbar(getString(R.string.iWatched), false, View.GONE, 0);
+        addReviewBinding.setToolbar(toolbar);
+        switchSearchAndReview();
+        setValuesToReviewSection(movieResult);
+        updateValuesForViews(movieResult.getId());
+    }
+
     private void updateValuesForViews(final Integer movieId) {
-        String[] tables = { "tbl_saved_reviews", "tbl_posts"};
-        for(String tableName: tables) {
+        final AddReview[] addReview = {new AddReview()};
+        addReview[0].setDate(getDateString());
+        viewModel.setaddReview(addReview[0]);
+        String[] tables = {"tbl_saved_reviews", "tbl_posts"};
+        for (String tableName : tables) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference dbRef = database.getReference(tableName);
             final String[] key = new String[1];
@@ -245,11 +273,11 @@ public class AddReviewActivity extends AppCompatActivity {
             dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot snapshot1: snapshot.getChildren()) {
-                        AddReview addReview = snapshot1.getValue(AddReview.class);
-                        if (addReview != null && Objects.equals(addReview.getId(), movieId)) {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        addReview[0] = snapshot1.getValue(AddReview.class);
+                        if (addReview[0] != null && Objects.equals(addReview[0].getId(), movieId)) {
                             key[0] = snapshot1.getKey();
-                            viewModel.setaddReview(addReview);
+                            viewModel.setaddReview(addReview[0]);
                             if (tableName.equalsIgnoreCase("tbl_posts")) {
                                 addReviewBinding.savePostBtn.setVisibility(View.GONE);
                                 addReviewBinding.postBtn.setVisibility(View.GONE);
@@ -259,12 +287,15 @@ public class AddReviewActivity extends AppCompatActivity {
                         }
                     }
                 }
+
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {}
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
             });
         }
     }
-    private void removePostFromSavedPost() {
+
+    private void removePostFromSavedPost(int id) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = database.getReference("tbl_saved_reviews");
         final String[] key = new String[1];
@@ -272,19 +303,22 @@ public class AddReviewActivity extends AppCompatActivity {
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1: snapshot.getChildren()) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     AddReview addReview = snapshot1.getValue(AddReview.class);
-                    if (addReview != null && Objects.equals(addReview.getId(), userReview.getId())) {
+                    if (addReview != null && Objects.equals(addReview.getId(), id)) {
                         key[0] = snapshot1.getKey();
                         dbRef.child(key[0]).removeValue();
                         break;
                     }
                 }
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
     }
+
     private void setValuesToReviewSection(MovieResults movieResult) {
         SpannableString spannableString = new SpannableString(movieResult.getTitle() + " " + movieResult.getReleaseDate().substring(0, 4));
         int spanLength = spannableString.toString().length();
@@ -298,10 +332,7 @@ public class AddReviewActivity extends AppCompatActivity {
         Glide.with(this).load(image).into(addReviewBinding.movieImage);
         userReview.setPosterPath(movieResult.getPosterPath());
 
-        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        Calendar calendar = Calendar.getInstance();
-        String date = calendar.get(Calendar.DAY_OF_MONTH) + " " + months[calendar.get(Calendar.MONTH)] + " " + calendar.get(Calendar.YEAR);
-        addReviewBinding.selectDate.setText(date);
+        addReviewBinding.selectDate.setText(getDateString());
 
         addReviewBinding.selectDate.setOnClickListener(v -> showDatePickerDialog(addReviewBinding.selectDate, months));
 
@@ -314,7 +345,7 @@ public class AddReviewActivity extends AppCompatActivity {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot snapshot1: snapshot.getChildren()) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             snapshot1.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -326,10 +357,17 @@ public class AddReviewActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
             }
         });
+    }
+
+    public String getDateString() {
+        Calendar calendar = Calendar.getInstance();
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + " " + months[calendar.get(Calendar.MONTH)] + " " + calendar.get(Calendar.YEAR);
+        return date;
     }
 
     private void showDatePickerDialog(TextView dateTextView, String[] months) {
@@ -338,7 +376,7 @@ public class AddReviewActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, selectedYear, selectedMonth, selectedDay) -> {
-           dateTextView.setText(selectedDay + " " + months[selectedMonth] + " " + selectedYear);
+            dateTextView.setText(selectedDay + " " + months[selectedMonth] + " " + selectedYear);
         }, year, month, day);
         datePickerDialog.show();
     }

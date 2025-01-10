@@ -17,4 +17,8 @@
     <string name="liked">Liked</string>
     <string name="save">Save</string>
     <string name="post">Post</string>
+    <string name="savedPosts">Saved Posts</string>
+    <string name="Reviews">Reviews</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

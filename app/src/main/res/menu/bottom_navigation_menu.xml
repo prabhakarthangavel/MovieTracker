@@ -3,14 +3,11 @@
 
     <item android:id="@+id/home"
         android:title="Home"
-        android:icon="@drawable/baseline_home_24"
-        android:textAppearance="@style/CustomBottomNavigationText"/>
+        android:icon="@drawable/baseline_home_24"/>
     <item android:id="@+id/createPost"
         android:title="Add Post"
-        android:icon="@drawable/baseline_newpost_24"
-        android:textAppearance="@style/CustomBottomNavigationText"/>
+        android:icon="@drawable/baseline_newpost_24"/>
     <item android:id="@+id/boomkmarks"
         android:title="Watchlists"
-        android:icon="@drawable/baseline_bookmarks_24"
-        android:textAppearance="@style/CustomBottomNavigationText"/>
+        android:icon="@drawable/baseline_bookmarks_24"/>
 </menu>

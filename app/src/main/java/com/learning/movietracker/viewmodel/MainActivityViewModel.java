@@ -25,6 +25,8 @@ public class MainActivityViewModel extends AndroidViewModel {
     private MovieDBRepo movieDBRepo;
     private String searchedKeyword;
 
+    private ObservableField<Boolean> fromWatchlist;
+
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
         this.movieDBRepo = new MovieDBRepo(application);
@@ -53,5 +55,13 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void setaddReview(AddReview addReview) {
         $addReview.set(addReview);
+    }
+
+    public ObservableField<Boolean> isFromWatchlist() {
+        return fromWatchlist;
+    }
+
+    public void setIsfromwatchlist(Boolean fromwatchlist) {
+        this.fromWatchlist = fromWatchlist;
     }
 }
